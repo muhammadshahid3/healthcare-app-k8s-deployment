@@ -194,7 +194,7 @@ The application runs in the `medical` namespace with two replicas each for the f
 kubectl -n medical get pods
 ```
 
-![Frontend and backend pods running](docs/screenshots/app-pods-running.png)
+![Frontend and backend pods running](docs/screenshots/frontendandbackendpodsrunning.png)
 
 All pods are `1/1 Running` with `0` restarts.
 
@@ -208,11 +208,11 @@ Argo CD runs in the `argocd` namespace and watches this repository.
 kubectl get pod -n argocd
 ```
 
-![Argo CD pods running](docs/screenshots/argocd-pods-running.png)
+![Argo CD pods running](docs/screenshots/argocdrunning.png)
 
 The `medical-app` application shows **Healthy** and **Synced** with auto-sync enabled. It manages the backend secret, the frontend and backend services, and the deployments with their pods.
 
-![Argo CD application tree](docs/screenshots/argocd-ui.png)
+![Argo CD application tree](docs/screenshots/gitopscli.png)
 
 To open the UI locally:
 
@@ -229,7 +229,7 @@ Prometheus scrapes pod and node metrics (Node Exporter runs on every worker node
 
 Alertmanager and the control-plane scrapers (etcd, scheduler, controller manager, kube-proxy) are disabled, because AWS manages the EKS control plane and they cannot be scraped.
 
-![Grafana dashboard](docs/screenshots/grafana-dashboard.png)
+![Grafana dashboard](docs/screenshots/grafana.png)
 
 ---
 
