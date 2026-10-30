@@ -31,7 +31,7 @@ The entire AWS platform is created with a single **Terraform** project (VPC, EKS
 | Frontend | React |
 | Backend | Laravel (PHP) REST API |
 | Database | Amazon RDS for MySQL 8.0 |
-| Secrets | AWS Secrets Manager and Kubernetes Secret |
+| Secrets | AWS Secrets Manager |
 | Infrastructure as Code | Terraform (AWS, Helm and Kubernetes providers) |
 | Orchestration | Amazon EKS, Kubernetes 1.33 |
 | Ingress | ingress-nginx behind an AWS Network Load Balancer |
