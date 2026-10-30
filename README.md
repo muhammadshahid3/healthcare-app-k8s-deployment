@@ -52,46 +52,20 @@ The entire AWS platform is created with a single **Terraform** project (VPC, EKS
 
 **Doctor dashboard**
 
-![Doctor dashboard](docs/screenshots/doctor-dashboard.png)
+![Doctor dashboard](docs/screenshots/profile.png)
 
 **Patient dashboard**
 
-![Patient dashboard](docs/screenshots/patient-dashboard.png)
+![Patient dashboard](docs/screenshots/profile2.png)
 
 ---
 
 ## Architecture
+![Patient dashboard](docs/screenshots/profile2.png)
+ 
+     
 
-```
-                               Internet
-                                  │
-                    AWS Network Load Balancer (internet-facing)
-                                  │
-                         ingress-nginx (2 replicas)
-                  ┌───────────────┼────────────────────┐
-                  │               │                    │
-           Frontend (React)  Backend (Laravel)    /grafana (Grafana)
-             2 pods             2 pods
-                                  │
-                                  │  reads DB credentials from the
-                                  │  Kubernetes Secret "rds-conn"
-                                  ▼
-                        Amazon RDS MySQL 8.0
-                     (private database subnets,
-                      port 3306 open to EKS nodes only)
 
-   ┌────────────────────────── VPC 10.0.0.0/16 (2 AZs) ──────────────────────────┐
-   │  Public subnets   : NLB, NAT gateway                                         │
-   │  Private subnets  : EKS worker nodes (t3.medium)                             │
-   │  Database subnets : RDS MySQL                                                │
-   └──────────────────────────────────────────────────────────────────────────────┘
-
-   Git repo (k8s/ folder) ──► Argo CD (auto-sync, prune, self-heal) ──► EKS
-   Prometheus + Node Exporter ──► Grafana
-   AWS Secrets Manager: backup copy of the RDS credentials
-```
-
----
 
 ## Terraform Infrastructure
 
