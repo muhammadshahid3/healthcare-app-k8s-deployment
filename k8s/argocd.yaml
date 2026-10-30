@@ -1,0 +1,33 @@
+# EKS cluster par Medical app deploy karne ke liye Argo CD Application.
+# Apply:  kubectl apply -f argocd-app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: medical-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/muhammadshahid3/medical_app_eks.git
+    targetRevision: main
+    path: k8s            # is folder mein kustomization.yaml hai
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: medical   # namespace Terraform ne banaya hai, rds-conn secret isi mein hai
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m

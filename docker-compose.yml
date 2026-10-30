@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: medical-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: medicaldb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -prootpassword --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    image: shahiddevops1/medicalapp-backend:43b0363e7bada1e2cf1d942ebcc9252f34d2e2d4 # <-- 'image' kiya aur space khatam ki
+    container_name: medical-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=db;Port=3306;Database=medicaldb;User=root;Password=rootpassword;"
+      Jwt__Key: "change-this-secret-key-to-something-long-and-random-123456"
+      Jwt__Issuer: "MedicalApi"
+      Jwt__Audience: "MedicalApp"
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: shahiddevops1/medicalapp-frontend:43b0363e7bada1e2cf1d942ebcc9252f34d2e2d4 # <-- 'image' kiya
+    container_name: medical-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  mysql_data:

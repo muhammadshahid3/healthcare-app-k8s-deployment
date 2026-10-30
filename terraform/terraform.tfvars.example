@@ -1,0 +1,7 @@
+# cp terraform.tfvars.example terraform.tfvars   (aur values badlein)
+# infra/terraform.tfvars
+db_password            = "6NqIoRLeDD0YC0l_PcPMVtuB"
+grafana_admin_password = "lAgVQ95g6bMEyRdNfb17"
+
+# GitHub repo jisme k8s/ folder hai. Khali = ArgoCD Application nahi banegi
+app_repo_url = "https://github.com/muhammadshahid3/medical_app_eks.git"

@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Namespace "medical" Terraform banata hai (kubernetes_namespace_v1.app), is liye namespace.yaml nahi hai
+namespace: medical
+
+resources:
+  - secret.yaml
+  - backend_deployment.yaml
+  - backend_service.yaml
+  - frontend_deployment.yaml
+  - frontend_service.yaml
+  - ingress.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: medibook
+
+# <ACCOUNT_ID> ki jagah apna AWS account id likhein
+# (terraform output ecr_backend_repository_url se poora URL mil jata hai)
+images:
+  - name: medical-backend
+    newName: shahiddevops1/medicalapp-backend
+    newTag: b4be432487dde1010536158920998aa2c3e30af2
+  - name: medical-frontend
+    newName: shahiddevops1/medicalapp-frontend
+    newTag: b4be432487dde1010536158920998aa2c3e30af2

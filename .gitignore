@@ -1,0 +1,27 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+override.tf
+override.tf.json
+
+# Secrets / env
+.env
+.env.*
+*.pem
+
+# Laravel
+vendor/
+storage/*.key
+
+# Node / React
+node_modules/
+build/
+dist/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
