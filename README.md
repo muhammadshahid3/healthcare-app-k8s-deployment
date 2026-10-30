@@ -1,6 +1,6 @@
 # MediBook: Healthcare Appointment Platform on AWS EKS
 
-![Landing page](docs/screenshots/landing-page.png)
+![Landing page](docs/screenshots/landingpage.png)
 
 **MediBook** is a React and Laravel medical appointment application running on **Amazon EKS** (Kubernetes). Doctors publish their available time slots, and patients browse doctors and book the slot that suits them.
 
@@ -61,7 +61,7 @@ The entire AWS platform is created with a single **Terraform** project (VPC, EKS
 ---
 
 ## Architecture
-![Patient dashboard](docs/screenshots/profile2.png)
+![Patient dashboard](docs/screenshots/arch.png)
  
      
 
